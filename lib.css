@@ -99,7 +99,7 @@ body{
   }
 
   .cardContainer{
-  display: flex;
+  display: none;
   flex-wrap: wrap; /*allows card to flow to next row when initial is full*/
   background-color: transparent;
   backdrop-filter: blur(2px);
@@ -113,14 +113,7 @@ body{
   border: white;
   border-style: double;
   justify-content: center;
-  align-content: center;
-
-}
-.cardContainer h5{
-  color: white;
-  text-align: center;
-  top: 0%;
-  margin-top: 0.5%;
+  
 }
 
 .bookCard{
@@ -129,9 +122,11 @@ body{
   width: 20%;
   height: 20%;
   border-radius: 5px;
+  margin-top: 2%;
   margin-left:2%; 
   margin-right: 2%;
-  margin-bottom: 4%; 
+  margin-bottom: 2%; 
+  padding: 5px 15px;
 }
 
 .bookCard h6 {
@@ -144,6 +139,14 @@ text-align: center;
   color: white;
   margin-left: 50px;
   margin-bottom: 5px;
-  border-radius: 5px;
+  border-radius: 10px;
+}
+
+.toggleRead{
+  background-color: green;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  
 }
 

@@ -49,13 +49,38 @@ console.log('library', myLibrary);
       <p><strong>Author:</strong> ${book.author}</p>
       <p><strong>Pages:</strong> ${book.pages}</p>
       <p class="readstatus">${book.status? "Read":"Not Read"}</p>
-      <button class='removeBtn')>Remove</button>
-      <button class='toggleRead'>Status</button>    
+      <button class='removeBtn' lib-id="${book.id}")>Remove</button>
+      <button class='toggleRead' lib-id="${book.id}">
+      ${book.status? "Mark as Unread" : "Mark as Read"}
+      </button> 
     `;
+
+// Add event listener to the Remove button
+/*querySelector: element does NOT have an id, but has a class, tag, or attribute you can select by. 
+  getElementById: when element has a unique id attribute assigned in the HTML*/
+ let removeBtn = card.querySelector('.removeBtn'); 
+ removeBtn.addEventListener('click', (e) => {
+  let idToRemove = e.target.getAttribute('lib-id');
+  myLibrary = myLibrary.filter(book => book.id !== idToRemove);
+  displayBooks(); 
+});
+
+//adding toggle status functionality
+let toggleBtn = card.querySelector('.toggleRead');
+toggleBtn.addEventListener('click', (e) =>{
+  let bookToToggle = myLibrary.find(book => book.id === toggleBtn.getAttribute('lib-id'));
+  if (bookToToggle) {
+    bookToToggle.status = !bookToToggle.status;
+    displayBooks();
+    }
+});
+
     // adding the card to the container
     cardContainer.appendChild(card);    
   })
 }
+
+
 
 const cardContainer = document.getElementById('cardContainer');
 bookForm.addEventListener('submit', (e) => {  
@@ -66,33 +91,22 @@ bookForm.addEventListener('submit', (e) => {
   //allow the book container to be visible when book is submitted
   cardContainer.style.display = 'flex'; 
   console.log('Submit clicked, showing container');  
+
+  bookForm.reset(); //makes the form empty for next entry
+  bookForm.style.display = 'none'; //hides the bookForm when one book is submitted
 });
 
+//allowing user to close form if they dont want to add a book
 closeBtn.addEventListener('click', () => {
   bookForm.style.display = 'none';
 });
 
-Book.prototype.toggleRead = function (){
-  this.read = !this.read;
-}
 
-function removeBook (index){
-  myLibrary.splice(index, 1);
-  displayBooks();
-}
-/*
-//adding event listeners to the remove and toggle buttons
-removeBtn.addEventListener('click', () => {
-  myLibrary.splice(index, 1);
-  displayBooks();
-})
 
-function toggleRead(index){
-  myLibrary[index].toggleRead();
-  render();
-}
 
-*/
+
+
+
 
 
 
